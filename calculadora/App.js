@@ -6,17 +6,38 @@ import PadButton from './components/PadButton';
 export default function App() {
 
   const [ displayValue, setDisplayValue ] = useState('0');
+  const [ clearDisplay, setClearDisplay ] = useState(false);
+  const [ operation, setOperation ] = useState(null);
+  const [ values, setValues ] = useState([0, 0]);
+  const [current, setCurrent] = useState(0)
   
   const addDigit = (n) => {
-    setDisplayValue(n)
+    if(n === '.' && displayValue.includes('.')) {
+      return;
+    }
+
+    const clearDisplay = displayValue === '0' 
+      || clearDisplay;
+
+    const currentValue = clearDisplay ? '' : displayValue;
+    const newDisplayValue = currentValue + n;
+    setDisplayValue(newDisplayValue);
+    setClearDisplay(false);
+
+    if( n !== '.') {
+      const newValue = parseFloat(newDisplayValue);
+      const newValuesArray = [...values];
+      newValuesArray[current] = newValue;
+      setValues(newValuesArray)
+    }
   }
 
   const clearMemory = () => {
     setDisplayValue('0');
-  }
-
-  const setOperation = (operation) => {
-
+    setClearDisplay(false);
+    setOperation(null);
+    setValues([0, 0]);
+    setCurrent(0);
   }
 
   return (
