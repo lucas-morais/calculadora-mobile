@@ -7,7 +7,7 @@ export default function App() {
 
   const [ displayValue, setDisplayValue ] = useState('0');
   const [ clearDisplay, setClearDisplay ] = useState(false);
-  const [ operation, setOperation ] = useState(null);
+  const [ currentOperation, setCurrentOperation ] = useState(null);
   const [ values, setValues ] = useState([0, 0]);
   const [current, setCurrent] = useState(0)
   
@@ -16,10 +16,9 @@ export default function App() {
       return;
     }
 
-    const clearDisplay = displayValue === '0' 
+    const haveToClearDisplay = displayValue === '0' 
       || clearDisplay;
-
-    const currentValue = clearDisplay ? '' : displayValue;
+    const currentValue = haveToClearDisplay ? '' : displayValue;
     const newDisplayValue = currentValue + n;
     setDisplayValue(newDisplayValue);
     setClearDisplay(false);
@@ -28,6 +27,28 @@ export default function App() {
       const newValue = parseFloat(newDisplayValue);
       const newValuesArray = [...values];
       newValuesArray[current] = newValue;
+      setValues(newValuesArray)
+    }
+  }
+
+  const setOperation = (operation) => {
+    if(current === 0) {
+      setCurrentOperation(operation)
+      setCurrent(1);
+      setClearDisplay(true);
+    } else {
+      const equals = operation === '=';
+      const newValuesArray = [...values];
+      try{
+        newValuesArray[0] = 
+          eval(`${values[0]} ${operation} ${values[1]}`);
+      } catch(e) {
+        newValuesArray[0] = values[0];
+      }
+      values[1] = 0;
+      setDisplayValue(newValuesArray);
+      setCurrentOperation( equals ? null : operation);
+      setCurrent( equals ? 0 : 1);
       setValues(newValuesArray)
     }
   }
