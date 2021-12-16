@@ -1,11 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import PadButton from './components/PadButton';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <View style={ styles.buttons }>   
+        <PadButton label="AC"/>      
+        <PadButton label="/"/>      
+        <PadButton label="7"/>      
+        <PadButton label="8"/>      
+        <PadButton label="9"/>      
+        <PadButton label="*"/>      
+        <PadButton label="4"/>      
+        <PadButton label="5"/>      
+        <PadButton label="6"/>      
+        <PadButton label="-"/>      
+        <PadButton label="1"/>      
+        <PadButton label="2"/>      
+        <PadButton label="3"/>      
+        <PadButton label="+"/>      
+        <PadButton label="0"/>      
+        <PadButton label="."/>      
+        <PadButton label="="/>      
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -13,9 +31,10 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1,  
   },
+  buttons: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  }
 });
