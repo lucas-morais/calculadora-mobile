@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import Display from './components/Display';
 import PadButton from './components/PadButton';
 
 export default function App() {
+  const [ displayValue, setDisplayValue ] = useState('0');
   return (
     <View style={styles.container}>
+      <Display value={ displayValue } />
       <View style={ styles.buttons }>   
         <PadButton label="AC"/>      
         <PadButton label="/"/>      
