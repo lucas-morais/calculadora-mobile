@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import Display from './components/Display';
 import PadButton from './components/PadButton';
 
@@ -15,7 +15,6 @@ export default function App() {
     if(n === '.' && displayValue.includes('.')) {
       return;
     }
-
     const haveToClearDisplay = displayValue === '0' 
       || clearDisplay;
     const currentValue = haveToClearDisplay ? '' : displayValue;
@@ -40,16 +39,17 @@ export default function App() {
       const equals = operation === '=';
       const newValuesArray = [...values];
       try{
-        newValuesArray[0] = 
-          eval(`${values[0]} ${operation} ${values[1]}`);
-      } catch(e) {
-        newValuesArray[0] = values[0];
+         newValuesArray[0] = 
+            eval(`${values[0]} ${currentOperation} ${values[1]}`);
+        } catch(e) {
+          newValuesArray[0] = values[0];
       }
-      values[1] = 0;
-      setDisplayValue(newValuesArray);
+      newValuesArray[1] = 0;
+      setDisplayValue(newValuesArray[0]);
       setCurrentOperation( equals ? null : operation);
       setCurrent( equals ? 0 : 1);
       setValues(newValuesArray)
+      setClearDisplay(true);
     }
   }
 
