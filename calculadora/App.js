@@ -12,11 +12,12 @@ export default function App() {
   const [current, setCurrent] = useState(0)
   
   const addDigit = (n) => {
-    if(n === '.' && displayValue.includes('.')) {
+    const haveToClearDisplay = displayValue === '0' 
+    || clearDisplay;
+    
+    if(n === '.' && !clearDisplay && displayValue.includes('.')) {
       return;
     }
-    const haveToClearDisplay = displayValue === '0' 
-      || clearDisplay;
     const currentValue = haveToClearDisplay ? '' : displayValue;
     const newDisplayValue = currentValue + n;
     setDisplayValue(newDisplayValue);
@@ -45,7 +46,7 @@ export default function App() {
           newValuesArray[0] = values[0];
       }
       newValuesArray[1] = 0;
-      setDisplayValue(newValuesArray[0]);
+      setDisplayValue(`${newValuesArray[0]}`);
       setCurrentOperation( equals ? null : operation);
       setCurrent( equals ? 0 : 1);
       setValues(newValuesArray)
@@ -54,11 +55,13 @@ export default function App() {
   }
 
   const clearMemory = () => {
+    console.log('aqui')
     setDisplayValue('0');
     setClearDisplay(false);
-    setOperation(null);
+    setCurrentOperation(null);
     setValues([0, 0]);
     setCurrent(0);
+    console.log(displayValue, clearDisplay, )
   }
 
   return (
