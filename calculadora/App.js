@@ -55,13 +55,11 @@ export default function App() {
   }
 
   const clearMemory = () => {
-    console.log('aqui')
     setDisplayValue('0');
     setClearDisplay(false);
     setCurrentOperation(null);
     setValues([0, 0]);
     setCurrent(0);
-    console.log(displayValue, clearDisplay, )
   }
 
   return (
