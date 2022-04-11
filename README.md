@@ -23,6 +23,7 @@ Calculadora mobile desenvolvida com **react-native**, utilizando com base o **Ex
 <br>
 
 ## Snipets - Divisão
+<p>
   <img src="./images/divisao_1.jpg" alt="calculadora divisao - 1" height="320px" width="180px"/>
 
   <img src="./images/divisao_2.jpg" alt="calculadora divisao - 2" height="320px" width="180px"/>
